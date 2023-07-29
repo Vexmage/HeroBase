@@ -22,7 +22,7 @@ values yourself into the stat fields. The character sheet should automatically
 
 
 For a name I'm thinking it could be called HeroBase
-and it utilizes a built in program called CharacterForge
+and it utilizes a built in program called CharacterForge or CharForge
 to build the characters that get stored in the database.
 
 
