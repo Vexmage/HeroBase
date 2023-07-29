@@ -28,3 +28,4 @@ to build the characters that get stored in the database.
 The idea is we'll be building this in C# and ASP, connecting to microsoft SQL server.
 If I understand things right, we'll begin by designing the C# code before we begin to gradually
 implement the SQL.  We'll be using the Model-View-Controller (MVC) design pattern and C#. 
+If I'm mistaken, let me know.
