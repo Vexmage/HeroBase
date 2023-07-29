@@ -48,4 +48,5 @@ If I'm mistaken, let me know.
     Technologies and Implementation:
         The project will be built using C# and ASP.NET.
         The back-end will connect to Microsoft SQL Server for data storage.
-        The development will follow the Model-View-Controller (MVC) design pattern, where C# will handle the application's logic (Model), ASP.NET will handle the presentation (View), and the Controller will manage the flow and communication between the Model and View.
+        The development will follow the Model-View-Controller (MVC) design pattern, where C# will handle the application's logic (Model), ASP.NET
+          will handle the presentation (View), and the Controller will manage the flow and communication between the Model and View.
