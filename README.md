@@ -1,4 +1,7 @@
 # HeroBase
+
+ALL OF THE FOLLOWING IS SUBJECT TO RECONSIDERATION UPON DISCUSSION
+
 Database with a front-end program to create and store TTRPG characters.
 Lets get into it, though:
 
