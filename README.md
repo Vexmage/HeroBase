@@ -5,7 +5,7 @@ ALL OF THE FOLLOWING IS SUBJECT TO RECONSIDERATION UPON DISCUSSION
 Database with a front-end program to create and store TTRPG characters.
 Lets get into it, though:
 
-TTRPG Character Database will be more than a mere database.
+TTRPG Character Database will become more than a mere database.
 
 The database functionality should be advanced
 However, attention must be given to the front end and
