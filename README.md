@@ -46,7 +46,8 @@ If I'm mistaken, let me know.
         The character sheet should automatically generate certain values that are the outcome of mathematical calculations based on the input data.
 
     Project Name and Program:
-        The project is named "HeroBase," and the front-end program is called "CharacterForge" or "CharForge."
+        The project is named "HeroBase," and the front-end program is called "HeroBase" and uses a subprogram called "CharForge" to generate and
+        fill out character sheets.
 
     Technologies and Implementation:
         The project will be built using C# and ASP.NET.
