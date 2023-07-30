@@ -47,7 +47,7 @@ If I'm mistaken, let me know.
 
     Project Name and Program:
         The project is named "HeroBase," and the front-end program is called "HeroBase" and uses a subprogram called "CharForge" to generate and
-        fill out character sheets.
+        fill out character sheets. 
 
     Technologies and Implementation:
         The project will be built using C# and ASP.NET.
