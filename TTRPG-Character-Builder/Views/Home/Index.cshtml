@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to TTRPG Character Builder</h1>
+    <p>Create, manage, and search for tabletop role-playing game characters.</p>
+
+
+    <a class="btn btn-primary btn-lg" href="/Character/Create" role="button">Create Character</a>
+    <a class="btn btn-primary btn-lg" href="@Url.Action("Index", "Character")">Character List</a>
+
+    <!-- Welcome Text Block -->
+    <div id="welcomeText" class="welcome-text">
+        Welcome to the TTRPG Character Builder! Click on either button above to start creating your character or to view the list of existing characters. Enjoy building your unique TTRPG persona!
+    </div>
+
+</div>

@@ -1,0 +1,22 @@
+﻿@model TTRPG_Character_Builder.Models.Character
+
+@{
+    ViewData["Title"] = "Character Detail";
+}
+
+<h2>Character Detail</h2>
+
+<div>
+    <h3>@Model.Name</h3>
+    <p>Race: @Model.Race</p>
+    <p>Class: @Model.Class</p>
+    <p>Strength: @Model.Strength</p>
+    <p>Dexterity: @Model.Dexterity</p>
+    <p>Constitution: @Model.Constitution</p>
+    <p>Intelligence: @Model.Intelligence</p>
+    <p>Wisdom: @Model.Wisdom</p>
+    <p>Charisma: @Model.Charisma</p>
+    <p>Base Attack Bonus: @Model.BaseAttackBonus</p>
+    <p>Armor Class Bonus: @Model.ArmorClassBonus</p>
+    <p>Hit Points: @Model.HitPoints</p>
+</div>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<TTRPG_Character_Builder.Models.Character>
+
+@{
+    ViewData["Title"] = "Character List";
+}
+
+<h2>Character List</h2>
+
+@using (Html.BeginForm("Index", "Character", FormMethod.Get))
+{
+    <p>
+        Find by name, race, or class: @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr
+            <th></th> <!-- Empty header for delete buttons -->>
+            <th>Name</th>
+            <th>Race</th>
+            <th>Class</th>
+            <th>Strength</th>
+            <th>Dexterity</th>
+            <th>Intelligence</th>
+            <th>Wisdom</th>
+            <th>Constitution</th>
+            <th>Charisma</th>
+            <th>Biography</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var character in Model)
+        {
+            <tr>
+                <!-- Delete Button -->
+                <td>
+                    <form asp-action="Delete" asp-route-id="@character.ID" method="post">
+                        <input type="submit" value="Delete" class="btn btn-danger"
+                               onclick="return confirm('Are you sure you want to delete this character?');" />
+                    </form>
+                </td>
+                <!-- Character Data -->
+                <td>@character.Name</td>
+                <td>@character.Race</td>
+                <td>@character.Class</td>
+                <td>@character.Strength</td>
+                <td>@character.Dexterity</td>
+                <td>@character.Intelligence</td>
+                <td>@character.Wisdom</td>
+                <td>@character.Constitution</td>
+                <td>@character.Charisma</td>
+                <td>@character.Biography</td>
+                <!-- Details Button -->
+                <td>
+                    <a asp-action="Detail" asp-route-id="@character.ID" class="btn btn-primary">Details</a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
