@@ -19,20 +19,24 @@ namespace TTRPG_Character_Builder.Controllers
         // GET: Character/Create
         public IActionResult Create()
         {
+            ViewBag.Races = new SelectList(_context.Races, "RaceId", "Name");
+            ViewBag.Classes = new SelectList(_context.Classes, "ClassId", "Name");
             return View();
         }
 
         // POST: Character/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Race,Class,Strength,Dexterity,Intelligence,Wisdom,Constitution,Charisma,Biography")] Character character)
+        public async Task<IActionResult> Create([Bind("Name,RaceId,ClassId,Strength,Dexterity,Intelligence,Wisdom,Constitution,Charisma,Biography")] Character character)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(character);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index)); // Redirect to the list or detail view
+                return RedirectToAction(nameof(Index)); 
             }
+            ViewBag.Races = new SelectList(_context.Races, "RaceId", "Name", character.RaceId);
+            ViewBag.Classes = new SelectList(_context.Classes, "ClassId", "Name", character.ClassId);
             return View(character);
         }
 
@@ -56,19 +60,18 @@ namespace TTRPG_Character_Builder.Controllers
 
         public async Task<IActionResult> Detail(int id)
         {
-            var character = await _context.Characters.FindAsync(id);
+            var character = await _context.Characters
+                .Include(c => c.Race)
+                .Include(c => c.Class)
+                .FirstOrDefaultAsync(m => m.CharacterId == id);
+
             if (character == null)
             {
                 return NotFound();
             }
-
-            // Calculate additional details
-            //character.BaseAttackBonus = CharacterDetailsCalculator.CalculateBaseAttackBonus(character.Strength, character.Dexterity);
-            //character.ArmorClassBonus = CharacterDetailsCalculator.CalculateArmorClassBonus(character.Dexterity);
-            //character.HitPoints = CharacterDetailsCalculator.CalculateHitPoints(character.Constitution);
-
             return View(character);
         }
+
 
 
         // GET: Character/Edit/5
@@ -84,6 +87,8 @@ namespace TTRPG_Character_Builder.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Races = new SelectList(_context.Races, "RaceId", "Name", character.RaceId);
+            ViewBag.Classes = new SelectList(_context.Classes, "ClassId", "Name", character.ClassId);
             return View(character);
         }
 

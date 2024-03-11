@@ -19,15 +19,15 @@
     <!-- Repeat for other fields like Race, Class, Attributes, etc. -->
 
     <div class="form-group">
-        <label asp-for="Race" class="control-label"></label>
-        <input asp-for="Race" class="form-control" />
-        <span asp-validation-for="Race" class="text-danger"></span>
+        <label asp-for="RaceId" class="control-label"></label>
+        <select asp-for="RaceId" class ="form-control" asp-items="ViewBag.Races"></select>
+        <span asp-validation-for="RaceId" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Class" class="control-label"></label>
-        <input asp-for="Class" class="form-control" />
-        <span asp-validation-for="Class" class="text-danger"></span>
+        <label asp-for="ClassId" class="control-label"></label>
+        <select asp-for="ClassId" class ="form-control" asp-items="ViewBag.Classes"></select>
+        <span asp-validation-for="ClassId" class="text-danger"></span>
     </div>
 
 

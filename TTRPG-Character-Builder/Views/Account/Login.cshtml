@@ -1,35 +1,39 @@
-﻿@model TTRPG_Character_Builder.Models.LoginViewModel
+@model TTRPG_Character_Builder.Models.LoginViewModel
 
 @{
     ViewData["Title"] = "Login";
 }
 
 <h2>Login</h2>
-<form method="post" asp-action="Login" asp-controller="User" id="loginForm">
-    <input asp-for="Username" placeholder="Username" required id="usernameField" />
-    <input asp-for="Password" placeholder="Password" required type="password" />
-    <button type="submit">Login</button>
+<form method="post" asp-action="Login" asp-controller="Account">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    
+    <div class="form-group">
+        <label asp-for="Username"></label>
+        <input asp-for="Username" class="form-control" placeholder="Username" required />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" placeholder="Password" required type="password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group form-check">
+        <input asp-for="RememberMe" class="form-check-input" />
+        <label class="form-check-label" asp-for="RememberMe">Remember me</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
 </form>
 
-@if (ViewBag.Users != null)
-{
-    <h2>User List</h2>
-    <ul>
-        @foreach (var user in ViewBag.Users)
-        {
-            <li class="user-name" style="cursor: pointer;">@user.Username</li>
-        }
-    </ul>
-}
+<div>
+    <p>
+        Don't have an account? <a asp-action="Register" asp-controller="Account">Register here</a>
+    </p>
+</div>
 
 @section Scripts {
-    <script>
-        // JavaScript to handle the click event on usernames
-        document.querySelectorAll('.user-name').forEach(item => {
-            item.addEventListener('click', event => {
-                document.getElementById('usernameField').value = event.target.textContent;
-            });
-        });
-    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-
