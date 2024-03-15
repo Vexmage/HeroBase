@@ -2,7 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using TTRPG_Character_Builder.Data;
 using TTRPG_Character_Builder.Models;
-using System.Linq; 
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
+using System.Threading.Tasks; // Add this namespace for Task
+
 
 namespace TTRPG_Character_Builder.Controllers
 {
@@ -33,7 +36,7 @@ namespace TTRPG_Character_Builder.Controllers
             {
                 _context.Add(character);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index)); 
+                return RedirectToAction(nameof(Index));
             }
             ViewBag.Races = new SelectList(_context.Races, "RaceId", "Name", character.RaceId);
             ViewBag.Classes = new SelectList(_context.Classes, "ClassId", "Name", character.ClassId);
@@ -51,8 +54,8 @@ namespace TTRPG_Character_Builder.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 characters = characters.Where(s => s.Name.Contains(searchString)
-                                       || s.Race.Contains(searchString)
-                                       || s.Class.Contains(searchString));
+                                       || s.Race.Name.Contains(searchString) // Corrected usage
+                                       || s.Class.Name.Contains(searchString)); // Corrected usage
             }
 
             return View("List", await characters.ToListAsync());
@@ -71,8 +74,6 @@ namespace TTRPG_Character_Builder.Controllers
             }
             return View(character);
         }
-
-
 
         // GET: Character/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -95,9 +96,9 @@ namespace TTRPG_Character_Builder.Controllers
         // POST: Character/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Race,Class,Strength,Dexterity,Intelligence,Wisdom,Constitution,Charisma,Biography")] Character character)
+        public async Task<IActionResult> Edit(int id, [Bind("CharacterId,Name,RaceId,ClassId,Strength,Dexterity,Intelligence,Wisdom,Constitution,Charisma,Biography")] Character character)
         {
-            if (id != character.ID)
+            if (id != character.CharacterId)
             {
                 return NotFound();
             }
@@ -111,7 +112,7 @@ namespace TTRPG_Character_Builder.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CharacterExists(character.ID))
+                    if (!CharacterExists(character.CharacterId))
                     {
                         return NotFound();
                     }
@@ -134,7 +135,7 @@ namespace TTRPG_Character_Builder.Controllers
             }
 
             var character = await _context.Characters
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.CharacterId == id);
             if (character == null)
             {
                 return NotFound();
@@ -156,7 +157,7 @@ namespace TTRPG_Character_Builder.Controllers
 
         private bool CharacterExists(int id)
         {
-            return _context.Characters.Any(e => e.ID == id);
+            return _context.Characters.Any(e => e.CharacterId == id);
         }
     }
 }

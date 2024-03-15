@@ -24,14 +24,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nta/GreatLynx/CS296N/HeroBase/HeroBase/TTRPG-Character-Builder/Views/Account/Manage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9NYW5hZ2UuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/nta/GreatLynx/CS296N/HeroBase/HeroBase/TTRPG-Character-Builder/Views/Account/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/nta/GreatLynx/CS296N/HeroBase/HeroBase/TTRPG-Character-Builder/Views/Character/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2hhcmFjdGVyL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -66,6 +58,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/nta/GreatLynx/CS296N/HeroBase/HeroBase/TTRPG-Character-Builder/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nta/GreatLynx/CS296N/HeroBase/HeroBase/TTRPG-Character-Builder/Views/User/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nta/GreatLynx/CS296N/HeroBase/HeroBase/TTRPG-Character-Builder/Views/User/Manage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9NYW5hZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nta/GreatLynx/CS296N/HeroBase/HeroBase/TTRPG-Character-Builder/Views/User/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/nta/GreatLynx/CS296N/HeroBase/HeroBase/TTRPG-Character-Builder/Views/_ViewImports.cshtml]

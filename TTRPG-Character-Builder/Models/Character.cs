@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TTRPG_Character_Builder.Models
@@ -14,7 +13,6 @@ namespace TTRPG_Character_Builder.Models
         public string Name { get; set; }
 
         public int Level { get; set; }
-
         public int Health { get; set; }
         public int Mana { get; set; }
 
@@ -33,13 +31,15 @@ namespace TTRPG_Character_Builder.Models
         public int Wisdom { get; set; }
         public int Charisma { get; set; }
 
+        public int BaseAttackBonus { get; set; }  // Added based on UML
+        public int ArmorClassBonus { get; set; }  // Added based on UML
+        public int HitPoints { get; set; }        // Added based on UML
+
         [StringLength(1000)]
         public string? Biography { get; set; }
 
-        // ForeignKey for User
-        public int UserID { get; set; }
-
-        // Navigation property for User (optional)
-        public User User { get; set; }
+        // ForeignKey for ApplicationUser instead of User
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

@@ -18,7 +18,8 @@ namespace TTRPG_Character_Builder.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
+
         }
 
         // GET: User/Register
