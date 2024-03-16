@@ -7,8 +7,9 @@ namespace TTRPG_Character_Builder.Controllers
         // GET: /
         public IActionResult Index()
         {
-            return View();
+            return View("Home"); 
         }
+
 
         // GET: /Home/Privacy (optional)
         public IActionResult Privacy()

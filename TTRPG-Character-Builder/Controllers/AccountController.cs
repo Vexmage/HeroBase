@@ -16,15 +16,14 @@ namespace TTRPG_Character_Builder.Controllers
             _signInManager = signInManager;
         }
 
-        // GET: /Account/Login
-        [HttpGet]
+        // GET: Account/Login
         public IActionResult Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
-        // POST: /Account/Login
+        // POST: Account/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
@@ -43,12 +42,38 @@ namespace TTRPG_Character_Builder.Controllers
                     return View(model);
                 }
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(model); // Redisplay form on failure
         }
 
-        // POST: /Account/Logout
+        // GET: Account/Register
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        // POST: Account/Register
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+            return View(model); // Redisplay form on failure
+        }
+
+        // POST: Account/Logout
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()

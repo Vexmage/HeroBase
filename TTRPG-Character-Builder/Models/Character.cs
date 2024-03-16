@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
 
 namespace TTRPG_Character_Builder.Models
 {
@@ -31,15 +32,19 @@ namespace TTRPG_Character_Builder.Models
         public int Wisdom { get; set; }
         public int Charisma { get; set; }
 
-        public int BaseAttackBonus { get; set; }  // Added based on UML
-        public int ArmorClassBonus { get; set; }  // Added based on UML
-        public int HitPoints { get; set; }        // Added based on UML
+        public int BaseAttackBonus { get; set; }
+        public int ArmorClassBonus { get; set; }
+        public int HitPoints { get; set; }
 
         [StringLength(1000)]
         public string? Biography { get; set; }
 
-        // ForeignKey for ApplicationUser instead of User
+        // ForeignKey for ApplicationUser
         public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+
+        // ForeignKey for Party
+        public int? PartyId { get; set; } // It's nullable to allow for characters not part of a party
+        public Party Party { get; set; }
     }
 }
