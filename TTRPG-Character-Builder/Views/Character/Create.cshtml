@@ -1,150 +1,149 @@
 ﻿@model TTRPG_Character_Builder.Models.Character
 
-
 @{
     ViewData["Title"] = "Create Character";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="Create">
+<form asp-action="Create" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
+        <label asp-for="Name" class="control-label">Name</label>
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
-    <!-- Repeat for other fields like Race, Class, Attributes, etc. -->
-
+    <!-- Race dropdown -->
     <div class="form-group">
-        <label asp-for="RaceId" class="control-label"></label>
-        <select asp-for="RaceId" class ="form-control" asp-items="ViewBag.Races"></select>
+        <label asp-for="RaceId" class="control-label">Race</label>
+        <select asp-for="RaceId" class="form-control">
+            <option value="">-- Select Race --</option>
+            @if (ViewBag.Races != null)
+            {
+                foreach (var race in ViewBag.Races)
+                {
+                    <option value="@race.RaceId">@race.Name</option>
+                }
+            }
+        </select>
         <span asp-validation-for="RaceId" class="text-danger"></span>
     </div>
 
+    <!-- Class dropdown -->
     <div class="form-group">
-        <label asp-for="ClassId" class="control-label"></label>
-        <select asp-for="ClassId" class ="form-control" asp-items="ViewBag.Classes"></select>
+        <label asp-for="ClassId" class="control-label">Class</label>
+        <select asp-for="ClassId" class="form-control">
+            <option value="">-- Select Class --</option>
+            @if (ViewBag.Classes != null)
+            {
+                foreach (var classItem in ViewBag.Classes)
+                {
+                    <option value="@classItem.ClassId">@classItem.Name</option>
+                }
+            }
+        </select>
         <span asp-validation-for="ClassId" class="text-danger"></span>
     </div>
 
 
+    <!-- Attributes -->
+    <!-- Add a container for the dice rolling animation -->
+    <div id="diceAnimationContainer">
+        <img src="~/img/dice-roll-dice.gif" alt="Dice Rolling Animation" />
+    </div>
 
-    <!-- Strength field -->
+
     <div class="form-group">
-        <label asp-for="Strength" class="control-label"></label>
-        <input asp-for="Strength" type="number" class="form-control" readonly />
-        <button onclick="rollDice()">Roll for Strength</button>
-        <span id="StrengthRolls">0</span>/2
+        <label asp-for="Strength" class="control-label">Strength</label>
+        <input asp-for="Strength" class="form-control" readonly />
+        <button type="button" class="btn btn-secondary" onclick="rollDice('Strength')">Roll for Strength</button>
+        <span id="StrengthRollResult"></span>
         <span asp-validation-for="Strength" class="text-danger"></span>
     </div>
 
-    <!-- HTML here -->
-    <div class="dice" id="dice">
-        <div class="side front">1</div>
-        <div class="side back">6</div>
-        <div class="side right">3</div>
-        <div class="side left">4</div>
-        <div class="side top">5</div>
-        <div class="side bottom">2</div>
-    </div>
-
-    <!-- Dexterity field -->
     <div class="form-group">
-        <label asp-for="Dexterity" class="control-label"></label>
-        <input asp-for="Dexterity" type="number" class="form-control" readonly />
-        <button type="button" onclick="rollDice('Dexterity')">Roll for Dexterity</button>
-        <span id="DexterityRolls">0</span>/2
+        <label asp-for="Dexterity" class="control-label">Dexterity</label>
+        <input asp-for="Dexterity" class="form-control" readonly />
+        <button type="button" class="btn btn-secondary" onclick="rollDice('Dexterity')">Roll for Dexterity</button>
+        <span id="DexterityRollResult"></span>
         <span asp-validation-for="Dexterity" class="text-danger"></span>
     </div>
 
-    <!-- Intelligence field -->
     <div class="form-group">
-        <label asp-for="Intelligence" class="control-label"></label>
-        <input asp-for="Intelligence" type="number" class="form-control" readonly />
-        <button type="button" onclick="rollDice('Intelligence')">Roll for Intelligence</button>
-        <span id="IntelligenceRolls">0</span>/2
-        <span asp-validation-for="Intelligence" class="text-danger"></span>
-    </div>
-
-    <!-- Wisdom field -->
-    <div class="form-group">
-        <label asp-for="Wisdom" class="control-label"></label>
-        <input asp-for="Wisdom" type="number" class="form-control" readonly />
-        <button type="button" onclick="rollDice('Wisdom')">Roll for Wisdom</button>
-        <span id="WisdomRolls">0</span>/2
-        <span asp-validation-for="Wisdom" class="text-danger"></span>
-    </div>
-
-    <!-- Constitution field -->
-    <div class="form-group">
-        <label asp-for="Constitution" class="control-label"></label>
-        <input asp-for="Constitution" type="number" class="form-control" readonly />
-        <button type="button" onclick="rollDice('Constitution')">Roll for Constitution</button>
-        <span id="ConstitutionRolls">0</span>/2
+        <label asp-for="Constitution" class="control-label">Constitution</label>
+        <input asp-for="Constitution" class="form-control" readonly />
+        <button type="button" class="btn btn-secondary" onclick="rollDice('Constitution')">Roll for Constitution</button>
+        <span id="ConstitutionRollResult"></span>
         <span asp-validation-for="Constitution" class="text-danger"></span>
     </div>
 
-    <!-- Charisma field -->
     <div class="form-group">
-        <label asp-for="Charisma" class="control-label"></label>
-        <input asp-for="Charisma" type="number" class="form-control" readonly />
-        <button type="button" onclick="rollDice('Charisma')">Roll for Charisma</button>
-        <span id="CharismaRolls">0</span>/2
+        <label asp-for="Intelligence" class="control-label">Intelligence</label>
+        <input asp-for="Intelligence" class="form-control" readonly />
+        <button type="button" class="btn btn-secondary" onclick="rollDice('Intelligence')">Roll for Intelligence</button>
+        <span id="IntelligenceRollResult"></span>
+        <span asp-validation-for="Intelligence" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Wisdom" class="control-label">Wisdom</label>
+        <input asp-for="Wisdom" class="form-control" readonly />
+        <button type="button" class="btn btn-secondary" onclick="rollDice('Wisdom')">Roll for Wisdom</button>
+        <span id="WisdomRollResult"></span>
+        <span asp-validation-for="Wisdom" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Charisma" class="control-label">Charisma</label>
+        <input asp-for="Charisma" class="form-control" readonly />
+        <button type="button" class="btn btn-secondary" onclick="rollDice('Charisma')">Roll for Charisma</button>
+        <span id="CharismaRollResult"></span>
         <span asp-validation-for="Charisma" class="text-danger"></span>
     </div>
 
+    <!-- End of attribute block -->
 
-
-    <!-- Biography field -->
     <div class="form-group">
-        <label asp-for="Biography" class="control-label"></label>
+        <label asp-for="Biography" class="control-label">Biography</label>
         <textarea asp-for="Biography" class="form-control"></textarea>
         <span asp-validation-for="Biography" class="text-danger"></span>
     </div>
 
-
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+
+    <!-- Animation container -->
+    <div id="animationContainer" style="display: none;">
+        <img id="animationImage" src="~/images/dice_animation.gif" alt="Dice Animation" />
     </div>
 </form>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function rollDice(attribute) {
-            var rollCount = document.getElementById(attribute + 'Rolls');
-            if (parseInt(rollCount.innerText) >= 2) {
-                alert("No more rerolls available for " + attribute + "!");
-                return;
-            }
-
             var rolls = [];
             for (var i = 0; i < 4; i++) {
                 rolls.push(Math.floor(Math.random() * 6) + 1);
             }
 
-            rolls.sort().shift(); // Remove the lowest roll
-            var sum = rolls.reduce((a, b) => a + b, 0); // Sum the remaining rolls
+            rolls.sort((a, b) => b - a);
+            rolls.pop(); // Remove the lowest roll
+            var total = rolls.reduce((a, b) => a + b, 0);
 
-            document.getElementById(attribute).value = sum; // Update the attribute field
-            rollCount.innerText = parseInt(rollCount.innerText) + 1; // Increment the roll counter
+            document.getElementById(attribute).value = total; // Set the value in the input
+            document.getElementById(attribute + 'RollResult').innerHTML = 'Rolled: ' + rolls.join(', ') + ' (Total: ' + total + ')';
+
+            // Trigger the dice rolling animation
+            var diceAnimationContainer = document.getElementById('diceAnimationContainer');
+            diceAnimationContainer.classList.add('roll-animation');
+            setTimeout(() => {
+                diceAnimationContainer.classList.remove('roll-animation');
+            }, 3000); // Adjust the duration of the animation
         }
-    </script>
 
-    <script>
-        // Modify rollDice function to include dice animation
-        var dice = document.getElementById("dice");
-        var randomNum = Math.floor(Math.random() * 6) + 1; // 1 to 6
-        var rotateX = Math.floor(Math.random() * 360) + 360 * (randomNum - 1); // Random rotation
-        var rotateY = Math.floor(Math.random() * 360) + 360 * (randomNum - 1); // Random rotation
-        dice.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        }
     </script>
-
 }

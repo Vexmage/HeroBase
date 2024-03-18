@@ -6,17 +6,24 @@
 
 <h2>Character Detail</h2>
 
-<div>
-    <h3>@Model.Name</h3>
-    <p>Race: @Model.Race.Name</p>
-    <p>Class: @Model.Class.Name</p>
-    <p>Strength: @Model.Strength</p>
-    <p>Dexterity: @Model.Dexterity</p>
-    <p>Constitution: @Model.Constitution</p>
-    <p>Intelligence: @Model.Intelligence</p>
-    <p>Wisdom: @Model.Wisdom</p>
-    <p>Charisma: @Model.Charisma</p>
-    <p>Base Attack Bonus: @Model.BaseAttackBonus</p>
-    <p>Armor Class Bonus: @Model.ArmorClassBonus</p>
-    <p>Hit Points: @Model.HitPoints</p>
-</div>
+@if (Model != null)
+{
+    <div>
+        <h3>@Model.Name</h3>
+        <p>Race: @(Model.Race != null ? Model.Race.Name : "Unknown")</p>
+        <p>Class: @(Model.Class != null ? Model.Class.Name : "Unknown")</p>
+        <p>Strength: @Model.Strength</p>
+        <p>Dexterity: @Model.Dexterity</p>
+        <p>Constitution: @Model.Constitution</p>
+        <p>Intelligence: @Model.Intelligence</p>
+        <p>Wisdom: @Model.Wisdom</p>
+        <p>Charisma: @Model.Charisma</p>
+
+    </div>
+}
+else
+{
+    <p>Character not found.</p>
+}
+
+<a asp-action="Index" class="btn btn-primary">Back to List</a>

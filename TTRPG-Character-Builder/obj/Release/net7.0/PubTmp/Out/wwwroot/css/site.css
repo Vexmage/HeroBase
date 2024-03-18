@@ -1,0 +1,174 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    background-image: url('/img/dungeon1.jpg');
+    background-size: cover;
+    position: relative;
+    color: #FFD700; /* Gold color */
+}
+
+.main-content {
+    flex: 1;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Adjust the color and opacity as needed */
+    z-index: -1; /* Ensures the overlay is behind the content */
+}
+
+a {
+    color: #FFD700; /* Gold color */
+    text-decoration: none; /* Optional: Removes underline from links */
+}
+
+a:hover {
+    color: #FFA500; /* A slightly different color for hover effect */
+    text-decoration: underline; /* Optional: Underline on hover */
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    color: #FFD700; /* Gold color */
+    font-weight: bold; /* Makes the heading bold */
+    margin-top: 0; /* Ensures there is no margin-top restarting each heading */
+}
+
+
+table th {
+    font-size: 16px; /* Adjust the font size as needed */
+    font-weight: bold; /* Makes the header text bold */
+    color: #FFA500; /* Example color: orange-yellow for contrast */
+    text-transform: uppercase; /* Optional: transforms text to uppercase */
+    padding: 8px; /* Adjust padding for spacing */
+}
+
+table td {
+    font-size: 16px; /* Adjust the font size as needed */
+    color: #FFD700; /* Example color: orange-yellow for contrast */
+    padding: 8px; /* Adjust padding for spacing */
+}
+
+.bg-custom {
+    background-color: #1b2926 !important; /* Dark green background */
+}
+
+/* Fade-in animation for the welcome text */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.welcome-text {
+    opacity: 0; /* Start with the element being transparent */
+    animation: fadeIn ease-in-out 1s forwards; /* Animation name, timing function, duration, and fill mode */
+    animation-delay: 1s; /* Start the animation after a 1-second delay */
+    margin-top: 20px; /* Space between the buttons and the text block */
+}
+
+
+/* Custom color for navbar links */
+.navbar-light .navbar-nav .nav-link,
+.navbar-light .navbar-brand,
+.navbar-light .nav-item {
+    color: #e9ecef; /* Light grey color */
+}
+
+/* Change color for hover state */
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-brand:hover {
+    color: #f8f9fa; /* Slightly lighter color for hover */
+}
+
+/* User info and logout link styles */
+.navbar-custom .user-info,
+.navbar-custom .nav-link.logout {
+    color: #e9ecef; /* Light grey color */
+    padding: 0.5rem 1rem; /* Padding to match other nav links */
+    text-decoration: none; /* No underline */
+}
+
+.navbar-custom .user-info:hover,
+.navbar-custom .nav-link.logout:hover {
+    color: #f8f9fa; /* Slightly lighter color for hover */
+    text-decoration: underline; /* Underline on hover */
+}
+
+.footer {
+    background-color: #1b2926; /* Dark background for footer */
+    color: #e9ecef; /* Light text color for footer */
+    opacity: 0.8; /* Transparency effect */
+}
+
+.dice {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+    .dice .side {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: white;
+        border: 1px solid #333;
+        line-height: 100px;
+        text-align: center;
+        font-size: 2em;
+    }
+
+    .dice .front {
+        transform: translateZ(50px);
+    }
+
+    .dice .back {
+        transform: rotateY(180deg) translateZ(50px);
+    }
+
+    .dice .right {
+        transform: rotateY(90deg) translateZ(50px);
+    }
+
+    .dice .left {
+        transform: rotateY(-90deg) translateZ(50px);
+    }
+
+    .dice .top {
+        transform: rotateX(90deg) translateZ(50px);
+    }
+
+    .dice .bottom {
+        transform: rotateX(-90deg) translateZ(50px);
+    }

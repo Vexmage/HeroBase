@@ -8,4 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TTRPGtests
-build_property.ProjectDir = C:\Users\15412\Documents\CS295N\TTRPGCharBuilder\TTRPG-Character-Builder\TTRPGtests\
+build_property.ProjectDir = C:\Users\15412\Documents\CS 296N\HeroBase\TTRPGtests\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

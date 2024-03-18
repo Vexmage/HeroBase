@@ -7,7 +7,7 @@
     <link rel="icon" href="img/lobericon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-   
+
     <link rel="stylesheet" href="~/TTRPG_Character_Builder.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
@@ -22,8 +22,8 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">   
-							<a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -31,31 +31,44 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (Context.Session.GetString("Username") != null)
+                        @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
                                 <span class="navbar-text user-info">
-                                    User: @Context.Session.GetString("Username")
+                                    User: @User.Identity.Name
                                 </span>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link logout" asp-controller="User" asp-action="Manage">Manage Account</a>
+                                <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
+                                    <button type="submit" class="nav-link logout btn btn-link">Logout</button>
+                                </form>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link logout" asp-controller="User" asp-action="Logout">Logout</a>
-                            </li>
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Admin" asp-action="ListUsers">User Management</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Admin" asp-action="ListRoles">Role Management</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Admin" asp-action="SeeUsers">See Users</a>
+                                </li> <!-- Include the "See Users" link here -->
+                            }
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="User" asp-action="Login">Login</a>
+                                <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="User" asp-action="Register">Register</a>
+                                <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                         }
+
                     </ul>
                 </div>
+
             </div>
         </nav>
     </header>

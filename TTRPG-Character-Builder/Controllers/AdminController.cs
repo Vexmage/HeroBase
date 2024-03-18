@@ -23,8 +23,6 @@ namespace TTRPG_Character_Builder.Controllers
 
         public IActionResult Index()
         {
-            // This could be a dashboard view where you show statistics, recent users, recent roles, etc.
-            // For simplicity, redirecting to role listing page
             return RedirectToAction(nameof(ListRoles));
         }
 
@@ -36,7 +34,6 @@ namespace TTRPG_Character_Builder.Controllers
 
         public IActionResult CreateUser()
         {
-            // Show a form to create a new user. This form should post to the CreateUser action.
             return View();
         }
 
@@ -46,23 +43,21 @@ namespace TTRPG_Character_Builder.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = new ApplicationUser { UserName = model.Username, Email = model.Email };
-                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    // Add the user to a default role, e.g., "RegisteredUser"
+                    await _userManager.AddToRoleAsync(user, "RegisteredUser");
                     return RedirectToAction(nameof(ListUsers));
                 }
-                foreach (IdentityError error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
+                AddErrors(result);  // Ensure you have a method to add errors to ModelState
             }
             return View(model);
         }
 
         public IActionResult CreateRole()
         {
-            // Returns a form to create a new role.
             return View();
         }
 
@@ -77,12 +72,8 @@ namespace TTRPG_Character_Builder.Controllers
                 {
                     return RedirectToAction(nameof(ListRoles));
                 }
-                foreach (IdentityError error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
+                AddErrors(result);
             }
-            // If we got this far, something failed, redisplay form
             return View(roleName);
         }
 
@@ -92,17 +83,14 @@ namespace TTRPG_Character_Builder.Controllers
             if (role == null)
             {
                 ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
-                return View("NotFound");
+                return View("NotFound");  
             }
 
             var model = new RoleEditViewModel
             {
                 RoleId = role.Id,
-                RoleName = role.Name,
-                Members = new List<ApplicationUser>(),
-                NonMembers = new List<ApplicationUser>()
+                RoleName = role.Name
             };
-
 
             foreach (var user in _userManager.Users)
             {
@@ -115,7 +103,6 @@ namespace TTRPG_Character_Builder.Controllers
                     model.NonMembers.Add(user);
                 }
             }
-
             return View(model);
         }
 
@@ -127,23 +114,17 @@ namespace TTRPG_Character_Builder.Controllers
             if (role != null)
             {
                 role.Name = model.RoleName;
-                var result = await _roleManager.UpdateAsync(role);
+                IdentityResult result = await _roleManager.UpdateAsync(role);
                 if (result.Succeeded)
                 {
                     return RedirectToAction(nameof(ListRoles));
                 }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
+                AddErrors(result);
             }
             else
             {
-                ViewBag.ErrorMessage = $"Role with Id = {model.RoleId} cannot be found";
                 return View("NotFound");
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -152,22 +133,16 @@ namespace TTRPG_Character_Builder.Controllers
             var role = await _roleManager.FindByIdAsync(id);
             if (role == null)
             {
-                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
                 return View("NotFound");
             }
-            else
+
+            var result = await _roleManager.DeleteAsync(role);
+            if (result.Succeeded)
             {
-                var result = await _roleManager.DeleteAsync(role);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction(nameof(ListRoles));
-                }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-                return View("ListRoles");
+                return RedirectToAction(nameof(ListRoles));
             }
+            AddErrors(result);
+            return View("ListRoles");
         }
 
         public async Task<IActionResult> ListUsers()
@@ -176,6 +151,20 @@ namespace TTRPG_Character_Builder.Controllers
             return View(users);
         }
 
+        public async Task<IActionResult> SeeUsers()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            return View(users);
+        }
 
+
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+        }
     }
 }

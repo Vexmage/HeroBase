@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\15412\\Documents\\CS 296N\\HeroBase\\TTRPG-Character-Builder\\wwwroot\\img\\dice-roll-dice.gif",
+      "PackagePath": "staticwebassets\\img\\dice-roll-dice.gif"
+    },
+    {
       "Id": "C:\\Users\\15412\\Documents\\CS 296N\\HeroBase\\TTRPG-Character-Builder\\wwwroot\\img\\dungeon1.jpg",
       "PackagePath": "staticwebassets\\img\\dungeon1.jpg"
     },

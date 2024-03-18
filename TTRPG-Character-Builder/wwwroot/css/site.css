@@ -172,3 +172,17 @@ table td {
     .dice .bottom {
         transform: rotateX(-90deg) translateZ(50px);
     }
+
+    .roll-animation {
+        animation: roll 3s infinite;
+    }
+
+    @keyframes roll {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }

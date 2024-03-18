@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using TTRPG_Character_Builder.Data;
 using TTRPG_Character_Builder.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace TTRPG_Character_Builder.Controllers
 {
@@ -60,28 +60,54 @@ namespace TTRPG_Character_Builder.Controllers
         // GET: Characters/Create
         public IActionResult Create()
         {
-            ViewBag.Races = new SelectList(_context.Races, "RaceId", "Name");
-            ViewBag.Classes = new SelectList(_context.Classes, "ClassId", "Name");
-            ViewBag.Parties = new SelectList(_context.Parties, "PartyId", "Name");
+            // Retrieve races and classes from the database
+            var races = _context.Races.ToList();
+            var classes = _context.Classes.ToList();
+
+            if (races == null || classes == null)
+            {
+                // Handle null collections gracefully
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewBag.Races = races;
+            ViewBag.Classes = classes;
+
             return View();
         }
 
         // POST: Characters/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CharacterId,Name,Level,Health,Mana,RaceId,ClassId,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,BaseAttackBonus,ArmorClassBonus,HitPoints,Biography,ApplicationUserId,PartyId")] Character character)
+        public async Task<IActionResult> Create([Bind("CharacterId,Name,RaceId,ClassId,Biography")] Character character)
         {
             if (ModelState.IsValid)
             {
+                // Retrieve the selected race and class objects from the database using the provided IDs
+                character.Race = await _context.Races.FindAsync(character.RaceId);
+                character.Class = await _context.Classes.FindAsync(character.ClassId);
+
+                if (character.Race == null || character.Class == null)
+                {
+                    // Handle null race or class gracefully
+                    return RedirectToAction(nameof(Index));
+                }
+
+                // Update character attributes based on selected race and class
+                character.UpdateAttributes();
+
+                // Add the character to the context and save changes
                 _context.Add(character);
                 await _context.SaveChangesAsync();
+
+                // Redirect to the index action after successful creation
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Races = new SelectList(_context.Races, "RaceId", "Name", character.RaceId);
-            ViewBag.Classes = new SelectList(_context.Classes, "ClassId", "Name", character.ClassId);
-            ViewBag.Parties = new SelectList(_context.Parties, "PartyId", "Name", character.PartyId);
+            // Handle ModelState.IsValid = false case, for example, by returning to the create view with validation errors
             return View(character);
         }
+
+
 
         // GET: Characters/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -98,14 +124,13 @@ namespace TTRPG_Character_Builder.Controllers
             }
             ViewBag.Races = new SelectList(_context.Races, "RaceId", "Name", character.RaceId);
             ViewBag.Classes = new SelectList(_context.Classes, "ClassId", "Name", character.ClassId);
-            ViewBag.Parties = new SelectList(_context.Parties, "PartyId", "Name", character.PartyId);
             return View(character);
         }
 
         // POST: Characters/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CharacterId,Name,Level,Health,Mana,RaceId,ClassId,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,BaseAttackBonus,ArmorClassBonus,HitPoints,Biography,ApplicationUserId,PartyId")] Character character)
+        public async Task<IActionResult> Edit(int id, [Bind("CharacterId,Name,RaceId,ClassId")] Character character)
         {
             if (id != character.CharacterId)
             {
@@ -116,6 +141,10 @@ namespace TTRPG_Character_Builder.Controllers
             {
                 try
                 {
+                    // Retrieve the selected race and class objects from the database using the provided IDs
+                    character.Race = await _context.Races.FindAsync(character.RaceId);
+                    character.Class = await _context.Classes.FindAsync(character.ClassId);
+
                     _context.Update(character);
                     await _context.SaveChangesAsync();
                 }
@@ -134,9 +163,9 @@ namespace TTRPG_Character_Builder.Controllers
             }
             ViewBag.Races = new SelectList(_context.Races, "RaceId", "Name", character.RaceId);
             ViewBag.Classes = new SelectList(_context.Classes, "ClassId", "Name", character.ClassId);
-            ViewBag.Parties = new SelectList(_context.Parties, "PartyId", "Name", character.PartyId);
             return View(character);
         }
+
 
         // GET: Characters/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -169,6 +198,7 @@ namespace TTRPG_Character_Builder.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool CharacterExists(int id)
         {

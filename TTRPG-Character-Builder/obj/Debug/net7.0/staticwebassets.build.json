@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eAWmQApZ6/9cLZiBc/pg1s0O5zQegSU08gROKyJ5fog=",
+  "Hash": "V5SwrYWVCiiw86ZtPpAZ+WhXk4WKl6MGt8oOerQb9ac=",
   "Source": "TTRPG-Character-Builder",
   "BasePath": "_content/TTRPG-Character-Builder",
   "Mode": "Default",
@@ -1231,6 +1231,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\15412\\Documents\\CS 296N\\HeroBase\\TTRPG-Character-Builder\\wwwroot\\img\\dice-roll-dice.gif",
+      "SourceId": "TTRPG-Character-Builder",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\15412\\Documents\\CS 296N\\HeroBase\\TTRPG-Character-Builder\\wwwroot\\",
+      "BasePath": "_content/TTRPG-Character-Builder",
+      "RelativePath": "img/dice-roll-dice.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\dice-roll-dice.gif"
     },
     {
       "Identity": "C:\\Users\\15412\\Documents\\CS 296N\\HeroBase\\TTRPG-Character-Builder\\wwwroot\\img\\dungeon1.jpg",

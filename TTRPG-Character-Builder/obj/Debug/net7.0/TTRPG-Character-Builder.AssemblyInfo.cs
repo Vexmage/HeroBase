@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TTRPG-Character-Builder")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2caecd45cc672c0efacaca816b12ee39ffc7f3e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b1604ea89c25318567c720b815036ae566dd4a95")]
 [assembly: System.Reflection.AssemblyProductAttribute("TTRPG-Character-Builder")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TTRPG-Character-Builder")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

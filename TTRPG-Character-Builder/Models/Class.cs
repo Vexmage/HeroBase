@@ -13,6 +13,13 @@ namespace TTRPG_Character_Builder.Models
 
         [StringLength(500)]
         public string Description { get; set; }
-        
+
+        // Add the missing properties
+        public int StrBonus { get; set; }
+        public int DexBonus { get; set; }
+        public int ConBonus { get; set; }
+        public int IntBonus { get; set; }
+        public int WisBonus { get; set; }
+        public int ChaBonus { get; set; } // Ensure this property is defined
     }
 }

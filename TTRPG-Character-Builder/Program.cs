@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using TTRPG_Character_Builder.Data;
 using TTRPG_Character_Builder.Models;
 using System;
+using System.Linq; // Add this namespace for Any() method
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -73,7 +74,13 @@ using (var scope = app.Services.CreateScope())
     {
         var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        await SeedData.SeedDataAsync(userManager, roleManager);
+        var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
+
+        // Check if data already seeded
+        if (!dbContext.Races.Any() || !dbContext.Classes.Any())
+        {
+            await SeedData.SeedDataAsync(userManager, roleManager, dbContext);
+        }
     }
     catch (Exception ex)
     {

@@ -82,6 +82,7 @@ namespace TTRPG_Character_Builder.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
+
         private IActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))

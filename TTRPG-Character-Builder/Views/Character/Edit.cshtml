@@ -1,5 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model TTRPG_Character_Builder.Models.Character
+
 @{
+    ViewData["Title"] = "Edit Character";
 }
+
+<h2>Edit Character</h2>
+
+@if (Model != null)
+{
+    <form asp-action="Edit" method="post">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label">Name</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <!-- Add input fields for other character attributes -->
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a asp-action="Detail" asp-route-id="@Model.CharacterId" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+}
+else
+{
+    <p>Character not found.</p>
+}
+
+<a asp-action="Index" class="btn btn-primary">Back to List</a>
