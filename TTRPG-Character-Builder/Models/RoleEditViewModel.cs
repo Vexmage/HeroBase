@@ -1,9 +1,12 @@
-﻿using TTRPG_Character_Builder.Models;
+﻿using System.Collections.Generic;
 
-public class RoleEditViewModel
+namespace TTRPG_Character_Builder.Models
 {
-    public string RoleId { get; set; }
-    public string RoleName { get; set; }
-    public IEnumerable<ApplicationUser> Members { get; set; }
-    public IEnumerable<ApplicationUser> NonMembers { get; set; }
+    public class RoleEditViewModel
+    {
+        public string RoleId { get; set; }
+        public string RoleName { get; set; }
+        public List<ApplicationUser> Members { get; set; } = new List<ApplicationUser>();
+        public List<ApplicationUser> NonMembers { get; set; } = new List<ApplicationUser>();
+    }
 }

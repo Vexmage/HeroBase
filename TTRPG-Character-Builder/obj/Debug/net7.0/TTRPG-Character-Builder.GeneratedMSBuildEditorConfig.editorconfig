@@ -14,7 +14,7 @@ build_property.EnableComHosting =
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
-build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\15412\Documents\CS 296N\HeroBase\TTRPG-Character-Builder
 build_property._RazorSourceGeneratorDebug = 
 
@@ -82,8 +82,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Home/Home.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb21lLmNzaHRtbA==
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Home/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFcnJvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Home/Privacy.cshtml]

@@ -13,7 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+// Combine AddControllersWithViews with AddRazorRuntimeCompilation
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
 builder.Services.AddRazorPages();
 
 // Configure session services
@@ -42,6 +44,10 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
+}
+else
+{
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();

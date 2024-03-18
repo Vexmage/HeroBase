@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using TTRPG_Character_Builder.Models;
 
 namespace TTRPG_Character_Builder.Controllers
 {
@@ -7,8 +9,9 @@ namespace TTRPG_Character_Builder.Controllers
         // GET: /
         public IActionResult Index()
         {
-            return View("Home"); 
+            return View("Index");
         }
+
 
 
         // GET: /Home/Privacy (optional)
@@ -20,6 +23,11 @@ namespace TTRPG_Character_Builder.Controllers
         public IActionResult About()
         {
             return View();
+        }
+
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
 
