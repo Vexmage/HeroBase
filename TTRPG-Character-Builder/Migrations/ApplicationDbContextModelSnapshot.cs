@@ -222,22 +222,18 @@ namespace TTRPGCharacterBuilder.Migrations
 
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("ArmorClassBonus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BaseAttackBonus")
-                        .HasColumnType("int");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Biography")
+                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("varchar(1000)");
 
                     b.Property<int>("Charisma")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClassId")
+                    b.Property<int?>("ClassId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("Constitution")
@@ -247,9 +243,6 @@ namespace TTRPGCharacterBuilder.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Health")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HitPoints")
                         .HasColumnType("int");
 
                     b.Property<int>("Intelligence")
@@ -263,14 +256,15 @@ namespace TTRPGCharacterBuilder.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int?>("PartyId")
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("RaceId")
+                    b.Property<int?>("RaceId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("Strength")
@@ -281,15 +275,13 @@ namespace TTRPGCharacterBuilder.Migrations
 
                     b.HasKey("CharacterId");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("ClassId");
 
                     b.HasIndex("PartyId");
 
                     b.HasIndex("RaceId");
 
-                    b.ToTable("Characters");
+                    b.ToTable("characters", (string)null);
                 });
 
             modelBuilder.Entity("TTRPG_Character_Builder.Models.Class", b =>
@@ -298,19 +290,37 @@ namespace TTRPGCharacterBuilder.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("ChaBonus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ConBonus")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
+
+                    b.Property<int>("DexBonus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IntBonus")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
+                    b.Property<int>("StrBonus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WisBonus")
+                        .HasColumnType("int");
+
                     b.HasKey("ClassId");
 
-                    b.ToTable("Classes");
+                    b.ToTable("classes", (string)null);
                 });
 
             modelBuilder.Entity("TTRPG_Character_Builder.Models.Party", b =>
@@ -326,12 +336,33 @@ namespace TTRPGCharacterBuilder.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("PartyId");
 
-                    b.ToTable("Parties");
+                    b.ToTable("parties", (string)null);
+                });
+
+            modelBuilder.Entity("TTRPG_Character_Builder.Models.PartyCharacter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PartyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CharacterId");
+
+                    b.HasIndex("PartyId");
+
+                    b.ToTable("PartyCharacter");
                 });
 
             modelBuilder.Entity("TTRPG_Character_Builder.Models.Race", b =>
@@ -370,7 +401,7 @@ namespace TTRPGCharacterBuilder.Migrations
 
                     b.HasKey("RaceId");
 
-                    b.ToTable("Races");
+                    b.ToTable("races", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -426,12 +457,6 @@ namespace TTRPGCharacterBuilder.Migrations
 
             modelBuilder.Entity("TTRPG_Character_Builder.Models.Character", b =>
                 {
-                    b.HasOne("TTRPG_Character_Builder.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TTRPG_Character_Builder.Models.Class", "Class")
                         .WithMany()
                         .HasForeignKey("ClassId")
@@ -439,7 +464,7 @@ namespace TTRPGCharacterBuilder.Migrations
                         .IsRequired();
 
                     b.HasOne("TTRPG_Character_Builder.Models.Party", "Party")
-                        .WithMany("Characters")
+                        .WithMany()
                         .HasForeignKey("PartyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -450,13 +475,30 @@ namespace TTRPGCharacterBuilder.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
-
                     b.Navigation("Class");
 
                     b.Navigation("Party");
 
                     b.Navigation("Race");
+                });
+
+            modelBuilder.Entity("TTRPG_Character_Builder.Models.PartyCharacter", b =>
+                {
+                    b.HasOne("TTRPG_Character_Builder.Models.Character", "Character")
+                        .WithMany()
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TTRPG_Character_Builder.Models.Party", "Party")
+                        .WithMany("Characters")
+                        .HasForeignKey("PartyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Character");
+
+                    b.Navigation("Party");
                 });
 
             modelBuilder.Entity("TTRPG_Character_Builder.Models.Party", b =>

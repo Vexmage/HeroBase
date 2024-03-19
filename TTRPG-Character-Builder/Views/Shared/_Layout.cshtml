@@ -30,6 +30,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -42,6 +43,7 @@
                                 <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
                                     <button type="submit" class="nav-link logout btn btn-link">Logout</button>
                                 </form>
+
                             </li>
                             @if (User.IsInRole("Administrator"))
                             {
@@ -60,6 +62,7 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>

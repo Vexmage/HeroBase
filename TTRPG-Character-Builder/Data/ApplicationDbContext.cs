@@ -20,15 +20,18 @@ namespace TTRPG_Character_Builder.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Specify the table names
+            modelBuilder.Entity<Character>().ToTable("characters");
+            modelBuilder.Entity<Race>().ToTable("races");
+            modelBuilder.Entity<Class>().ToTable("classes");
+            modelBuilder.Entity<Party>().ToTable("parties"); // This line ensures the Party entity maps to the "parties" table.
+
+            // Define the relationships and foreign key constraints
             modelBuilder.Entity<Party>()
                 .HasMany(p => p.Characters)
                 .WithOne(c => c.Party)
                 .HasForeignKey(c => c.PartyId);
 
-
-
-
-            // Additional configurations for Character entity if needed
             modelBuilder.Entity<Character>()
                 .HasOne(c => c.Race)
                 .WithMany()
@@ -38,6 +41,8 @@ namespace TTRPG_Character_Builder.Data
                 .HasOne(c => c.Class)
                 .WithMany()
                 .HasForeignKey(c => c.ClassId);
+
+            // Any additional entity configurations will be added here...
         }
     }
 }

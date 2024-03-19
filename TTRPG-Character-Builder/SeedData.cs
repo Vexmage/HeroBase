@@ -20,7 +20,7 @@ namespace TTRPG_Character_Builder.Data
 
         private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
         {
-            string[] roleNames = { "Guest", "RegisteredUser", "PartyLeader", "ContentCreator", "Administrator", "Moderator" };
+            string[] roleNames = { "Guest", "RegisteredUser", "PartyLeader", "DungeonMaster", "Administrator" };
             foreach (var roleName in roleNames)
             {
                 if (!await roleManager.RoleExistsAsync(roleName))
@@ -106,21 +106,61 @@ namespace TTRPG_Character_Builder.Data
 
         private static async Task SeedCharactersAsync(ApplicationDbContext context)
         {
+            // Ensure there are races and classes to assign to characters
+            if (!context.Races.Any() || !context.Classes.Any())
+            {
+                await SeedRacesAndClassesAsync(context); // This ensures races and classes are populated first
+            }
+
+            // Now that we're sure there are races and classes, fetch the first ones as defaults
+            var defaultRace = context.Races.FirstOrDefault();
+            var defaultClass = context.Classes.FirstOrDefault();
+
             if (!context.Characters.Any())
             {
-                // Create sample characters
-                var characters = new List<Character>
+                var sampleCharacters = new List<Character>
         {
-            new Character { Name = "Sample Character 1", Biography = "Biography for Sample Character 1" },
-            new Character { Name = "Sample Character 2", Biography = "Biography for Sample Character 2" },
+            new Character
+            {
+                Name = "Aragorn",
+                Strength = 15,
+                Dexterity = 10,
+                Intelligence = 12,
+                Wisdom = 14,
+                Constitution = 13,
+                Charisma = 11,
+                Biography = "A skilled ranger and warrior, Aragorn is the heir of Isildur.",
+                RaceId = defaultRace?.RaceId ?? 1, // Fallback to 1 if there's no default
+                ClassId = defaultClass?.ClassId ?? 1, // Fallback to 1 if there's no default
+                Health = 100,
+                Level = 5,
+                Mana = 30
+            },
+            new Character
+            {
+                Name = "Gandalf",
+                Strength = 10,
+                Dexterity = 8,
+                Intelligence = 18,
+                Wisdom = 16,
+                Constitution = 12,
+                Charisma = 15,
+                Biography = "A wizard, member of the Istari order, and leader of the Fellowship of the Ring.",
+                RaceId = defaultRace?.RaceId ?? 1, // Fallback to 1 if there's no default
+                ClassId = defaultClass?.ClassId ?? 1, // Fallback to 1 if there's no default
+                Health = 85,
+                Level = 10,
+                Mana = 100
+            }
             // Add more sample characters as needed
         };
 
                 // Add characters to the database
-                context.Characters.AddRange(characters);
+                context.Characters.AddRange(sampleCharacters);
                 await context.SaveChangesAsync();
             }
         }
+
 
 
 

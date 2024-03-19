@@ -1,26 +1,26 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using TTRPG_Character_Builder.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TTRPG_Character_Builder.ViewModels;
+using TTRPG_Character_Builder.Services;
 
 namespace TTRPG_Character_Builder.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly AuthenticationService _authenticationService;
+        private readonly RegistrationService _registrationService;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(AuthenticationService authenticationService, RegistrationService registrationService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _authenticationService = authenticationService;
+            _registrationService = registrationService;
         }
 
         // GET: Account/Login
         public IActionResult Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            return View(new LoginViewModel());
         }
 
         // POST: Account/Login
@@ -31,7 +31,7 @@ namespace TTRPG_Character_Builder.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _authenticationService.LoginAsync(model);
                 if (result.Succeeded)
                 {
                     return RedirectToLocal(returnUrl);
@@ -48,7 +48,7 @@ namespace TTRPG_Character_Builder.Controllers
         // GET: Account/Register
         public IActionResult Register()
         {
-            return View();
+            return View(new RegisterViewModel());
         }
 
         // POST: Account/Register
@@ -58,11 +58,9 @@ namespace TTRPG_Character_Builder.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
+                var result = await _registrationService.RegisterAsync(model);
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
                 foreach (var error in result.Errors)
@@ -78,10 +76,9 @@ namespace TTRPG_Character_Builder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
+            await _authenticationService.LogoutAsync();
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
-
 
         private IActionResult RedirectToLocal(string returnUrl)
         {

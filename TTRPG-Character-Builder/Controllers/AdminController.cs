@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿// AdminController.cs
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TTRPG_Character_Builder.Models;
+using TTRPG_Character_Builder.ViewModels;
+using TTRPG_Character_Builder.Services;
 
 namespace TTRPG_Character_Builder.Controllers
 {
@@ -21,22 +23,27 @@ namespace TTRPG_Character_Builder.Controllers
             _userManager = userManager;
         }
 
+
+        // GET: Admin
         public IActionResult Index()
         {
             return RedirectToAction(nameof(ListRoles));
         }
 
+        // GET: Admin/ListRoles
         public IActionResult ListRoles()
         {
             var roles = _roleManager.Roles.ToList();
             return View(roles);
         }
 
+        // GET: Admin/CreateUser
         public IActionResult CreateUser()
         {
             return View();
         }
 
+        // POST: Admin/CreateUser
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateUser(RegisterViewModel model)
@@ -56,11 +63,13 @@ namespace TTRPG_Character_Builder.Controllers
             return View(model);
         }
 
+        // GET: Admin/CreateRole
         public IActionResult CreateRole()
         {
             return View();
         }
 
+        // POST: Admin/CreateRole
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateRole(string roleName)
@@ -77,13 +86,14 @@ namespace TTRPG_Character_Builder.Controllers
             return View(roleName);
         }
 
+        // GET: Admin/EditRole/id
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await _roleManager.FindByIdAsync(id);
             if (role == null)
             {
                 ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
-                return View("NotFound");  
+                return View("NotFound");
             }
 
             var model = new RoleEditViewModel
@@ -106,6 +116,7 @@ namespace TTRPG_Character_Builder.Controllers
             return View(model);
         }
 
+        // POST: Admin/EditRole
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditRole(RoleEditViewModel model)
@@ -128,6 +139,7 @@ namespace TTRPG_Character_Builder.Controllers
             return View(model);
         }
 
+        // GET: Admin/DeleteRole/id
         public async Task<IActionResult> DeleteRole(string id)
         {
             var role = await _roleManager.FindByIdAsync(id);
@@ -145,19 +157,19 @@ namespace TTRPG_Character_Builder.Controllers
             return View("ListRoles");
         }
 
+        // GET: Admin/ListUsers
         public async Task<IActionResult> ListUsers()
         {
             var users = await _userManager.Users.ToListAsync();
             return View(users);
         }
 
+        // GET: Admin/SeeUsers
         public async Task<IActionResult> SeeUsers()
         {
             var users = await _userManager.Users.ToListAsync();
             return View(users);
         }
-
-
 
         private void AddErrors(IdentityResult result)
         {

@@ -8,44 +8,26 @@
 
 <form asp-action="Create" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+    <!-- Form fields, similar to the provided view, ensure all fields are correctly bound -->
     <div class="form-group">
         <label asp-for="Name" class="control-label">Name</label>
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
-    <!-- Race dropdown -->
+    <!-- The Race and Class dropdowns should be populated from ViewBag -->
     <div class="form-group">
         <label asp-for="RaceId" class="control-label">Race</label>
-        <select asp-for="RaceId" class="form-control">
-            <option value="">-- Select Race --</option>
-            @if (ViewBag.Races != null)
-            {
-                foreach (var race in ViewBag.Races)
-                {
-                    <option value="@race.RaceId">@race.Name</option>
-                }
-            }
-        </select>
+        <select asp-for="RaceId" asp-items="ViewBag.Races" class="form-control"></select>
         <span asp-validation-for="RaceId" class="text-danger"></span>
     </div>
 
-    <!-- Class dropdown -->
     <div class="form-group">
         <label asp-for="ClassId" class="control-label">Class</label>
-        <select asp-for="ClassId" class="form-control">
-            <option value="">-- Select Class --</option>
-            @if (ViewBag.Classes != null)
-            {
-                foreach (var classItem in ViewBag.Classes)
-                {
-                    <option value="@classItem.ClassId">@classItem.Name</option>
-                }
-            }
-        </select>
+        <select asp-for="ClassId" asp-items="ViewBag.Classes" class="form-control"></select>
         <span asp-validation-for="ClassId" class="text-danger"></span>
     </div>
+
 
 
     <!-- Attributes -->

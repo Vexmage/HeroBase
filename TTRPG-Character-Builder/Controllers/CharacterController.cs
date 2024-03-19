@@ -5,16 +5,19 @@ using TTRPG_Character_Builder.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging; 
 
 namespace TTRPG_Character_Builder.Controllers
 {
     public class CharacterController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<CharacterController> _logger;
 
-        public CharacterController(ApplicationDbContext context)
+        public CharacterController(ApplicationDbContext context, ILogger<CharacterController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: Characters
@@ -60,52 +63,47 @@ namespace TTRPG_Character_Builder.Controllers
         // GET: Characters/Create
         public IActionResult Create()
         {
-            // Retrieve races and classes from the database
-            var races = _context.Races.ToList();
-            var classes = _context.Classes.ToList();
-
-            if (races == null || classes == null)
-            {
-                // Handle null collections gracefully
-                return RedirectToAction(nameof(Index));
-            }
-
-            ViewBag.Races = races;
-            ViewBag.Classes = classes;
-
+            PrepareCharacterCreationData(); // Use this method to set ViewBag data for Races and Classes dropdowns
             return View();
         }
 
         // POST: Characters/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CharacterId,Name,RaceId,ClassId,Biography")] Character character)
+        public async Task<IActionResult> Create([Bind("CharacterId,Name,RaceId,ClassId,Biography,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma")] Character character)
         {
             if (ModelState.IsValid)
             {
-                // Retrieve the selected race and class objects from the database using the provided IDs
-                character.Race = await _context.Races.FindAsync(character.RaceId);
-                character.Class = await _context.Classes.FindAsync(character.ClassId);
-
-                if (character.Race == null || character.Class == null)
+                try
                 {
-                    // Handle null race or class gracefully
+                    _context.Add(character);
+                    await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
+                catch (Exception ex)
+                {
+                    // Log the exception for debugging purposes
+                    _logger.LogError(ex, "Error occurred while saving character");
 
-                // Update character attributes based on selected race and class
-                character.UpdateAttributes();
-
-                // Add the character to the context and save changes
-                _context.Add(character);
-                await _context.SaveChangesAsync();
-
-                // Redirect to the index action after successful creation
-                return RedirectToAction(nameof(Index));
+                    // Optionally, you can add an error message to the ModelState
+                    ModelState.AddModelError(string.Empty, "An error occurred while saving the character. Please try again.");
+                }
             }
-            // Handle ModelState.IsValid = false case, for example, by returning to the create view with validation errors
+            // If ModelState is not valid or an exception occurred, redisplay the form with the entered data
+            PrepareCharacterCreationData(); // Repopulate dropdown data if the form has issues
             return View(character);
         }
+
+
+        private void PrepareCharacterCreationData()
+        {
+            ViewBag.Races = new SelectList(_context.Races.OrderBy(r => r.Name), "RaceId", "Name");
+            ViewBag.Classes = new SelectList(_context.Classes.OrderBy(c => c.Name), "ClassId", "Name");
+            // Populate ViewBag.Parties if required:
+            // ViewBag.Parties = new SelectList(_context.Parties.OrderBy(p => p.Name), "PartyId", "Name");
+        }
+
+
 
 
 

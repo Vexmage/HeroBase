@@ -9,69 +9,131 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TTRPG_Character_Builder
 build_property.RootNamespace = TTRPG_Character_Builder
-build_property.ProjectDir = C:\Users\15412\Documents\CS295N\TTRPGCharBuilder\TTRPG-Character-Builder\TTRPG-Character-Builder\
+build_property.ProjectDir = C:\Users\15412\Documents\CS 296N\HeroBase\TTRPG-Character-Builder\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
-build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\15412\Documents\CS295N\TTRPGCharBuilder\TTRPG-Character-Builder\TTRPG-Character-Builder
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
+build_property.MSBuildProjectDirectory = C:\Users\15412\Documents\CS 296N\HeroBase\TTRPG-Character-Builder
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/About/Index.cshtml]
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/About/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/Account/Login.cshtml]
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Account/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/Account/Manage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxNYW5hZ2UuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/Account/Register.cshtml]
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/Character/Create.cshtml]
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Account/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Admin/CreateRole.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlUm9sZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Admin/EditRole.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFJvbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Admin/EditUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Admin/ListRoles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTGlzdFJvbGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Admin/ListUsers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTGlzdFVzZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Admin/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTm90Rm91bmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Admin/UserRoleManagement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlclJvbGVNYW5hZ2VtZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Character/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcmFjdGVyXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/Character/Detail.cshtml]
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Character/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcmFjdGVyXERldGFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/Character/Edit.cshtml]
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Character/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcmFjdGVyXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/Character/List.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcmFjdGVyXExpc3QuY3NodG1s
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Character/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcmFjdGVyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/Home/Index.cshtml]
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Home/About.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Home/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFcnJvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/Home/Privacy.cshtml]
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/Shared/Error.cshtml]
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Party/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydHlcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Party/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydHlcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Party/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydHlcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Party/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydHlcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Party/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydHlcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/_ViewImports.cshtml]
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/_ViewStart.cshtml]
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/15412/Documents/CS295N/TTRPGCharBuilder/TTRPG-Character-Builder/TTRPG-Character-Builder/Views/Shared/_Layout.cshtml]
+[C:/Users/15412/Documents/CS 296N/HeroBase/TTRPG-Character-Builder/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-tezfobz0p6

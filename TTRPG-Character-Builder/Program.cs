@@ -6,7 +6,9 @@ using Microsoft.Extensions.Hosting;
 using TTRPG_Character_Builder.Data;
 using TTRPG_Character_Builder.Models;
 using System;
-using System.Linq; // Add this namespace for Any() method
+using System.Linq;
+using TTRPG_Character_Builder.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +40,11 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddScoped<AuthenticationService>();
+builder.Services.AddScoped<RegistrationService>();
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -56,7 +63,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // Ensure authentication middleware is called before the authorization middleware.
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();
@@ -69,25 +76,24 @@ app.MapRazorPages();
 // Apply data seeding
 using (var scope = app.Services.CreateScope())
 {
-    var serviceProvider = scope.ServiceProvider;
+    var services = scope.ServiceProvider;
     try
     {
-        var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
+        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        var dbContext = services.GetRequiredService<ApplicationDbContext>();
 
-        // Check if data already seeded
-        if (!dbContext.Races.Any() || !dbContext.Classes.Any())
-        {
-            await SeedData.SeedDataAsync(userManager, roleManager, dbContext);
-        }
+        // Ensure the database is updated (optional, remove if using manual migrations)
+        dbContext.Database.Migrate();
+
+        // Apply the seed data
+        await SeedData.SeedDataAsync(userManager, roleManager, dbContext);
     }
     catch (Exception ex)
     {
-        var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+        var logger = services.GetRequiredService<ILogger<Program>>();
         logger.LogError(ex, "An error occurred seeding the DB.");
     }
 }
 
-// Run the application
 app.Run();

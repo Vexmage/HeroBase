@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TTRPG_Character_Builder.Models;
+using TTRPG_Character_Builder.ViewModels;
+
 
 namespace TTRPG_Character_Builder.Controllers
 {
