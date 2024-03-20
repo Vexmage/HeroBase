@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA2pbnL9X4DkOlGNrCkdGcZgAAAAACAAAAAAAQZgAAAAEAACAAAAB2zGWERbl5t72np8XJXHW8ZH4LbsN/6mlt5VXAkqyWRgAAAAAOgAAAAAIAACAAAADBnlCABWyGFYfcYvzyucIHNuoq2Uae9nvLq76Ev4w3x4AAAAAvLRcWdZ30xNO3v9AcClzhALWNN5Cddvk89nMbDp+UHw7E5h45mv6yJU1Ou2d/DXLD0//RAiTDOtCVBg0fL7mbwj5kA6Vpx5ciFjssAjgvbGjXShpkknfw05UR3sp64uBHvyZp/pwk97KJPGvp1N+RzJam6nzSaDm3rx51ZTnE7kAAAABnaqWkrkF74iqJBPcFRCk++UWYAwY3WauFIzpKCtibdusHlfgKckTruajRh87BsAxVzv1fzLHL92/Spnx4tLnG</EncryptedPassword>
+    <History>True|2024-03-20T15:22:06.1871281Z;True|2024-03-20T08:09:16.1399532-07:00;True|2024-03-20T07:58:01.8467920-07:00;True|2024-03-20T07:43:07.0776265-07:00;True|2024-03-20T07:35:18.6394905-07:00;True|2024-03-20T07:22:22.6540923-07:00;False|2024-03-20T04:59:07.3760250-07:00;False|2024-03-19T09:20:17.0706548-07:00;False|2024-03-19T08:51:14.7927618-07:00;False|2024-03-19T08:36:42.9479940-07:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=MYSQL8003.site4now.net%3bDatabase=db_aa21a3_heros2%3bUid=aa21a3_heros2%3bPwd=TroilOcon87!%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

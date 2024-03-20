@@ -1,6 +1,8 @@
 ﻿using Xunit;
-using TTRPG_Character_Builder.ViewModels; // Add this
+using TTRPG_Character_Builder.ViewModels; 
 using System.ComponentModel.DataAnnotations;
+using Moq;
+
 
 namespace TTRPGtests
 {
