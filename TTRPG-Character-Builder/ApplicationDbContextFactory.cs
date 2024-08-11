@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace TTRPG_Character_Builder.Data
 {
@@ -8,13 +9,20 @@ namespace TTRPG_Character_Builder.Data
     {
         public ApplicationDbContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseMySql("Server=localhost;Database=ttrpgvault;Uid=root;Pwd=87Wodahs87!;",
-                                    ServerVersion.AutoDetect("Server=localhost;Database=ttrpgvault;Uid=root;Pwd=87Wodahs87!;"));
+            // Build the configuration
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
 
+            // Get the connection string
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            // Build the DbContextOptions
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }
     }
-
 }
