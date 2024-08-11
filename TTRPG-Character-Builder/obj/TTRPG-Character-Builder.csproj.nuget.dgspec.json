@@ -1,27 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nta/GreatLynx/CS296N/HeroBase/HeroBase/TTRPG-Character-Builder/TTRPG-Character-Builder.csproj": {}
+    "C:\\Users\\namxe\\Documents\\Devel\\HeroBase-ASP\\HeroBase\\TTRPG-Character-Builder\\TTRPG-Character-Builder.csproj": {}
   },
   "projects": {
-    "/Users/nta/GreatLynx/CS296N/HeroBase/HeroBase/TTRPG-Character-Builder/TTRPG-Character-Builder.csproj": {
+    "C:\\Users\\namxe\\Documents\\Devel\\HeroBase-ASP\\HeroBase\\TTRPG-Character-Builder\\TTRPG-Character-Builder.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nta/GreatLynx/CS296N/HeroBase/HeroBase/TTRPG-Character-Builder/TTRPG-Character-Builder.csproj",
+        "projectUniqueName": "C:\\Users\\namxe\\Documents\\Devel\\HeroBase-ASP\\HeroBase\\TTRPG-Character-Builder\\TTRPG-Character-Builder.csproj",
         "projectName": "TTRPG-Character-Builder",
-        "projectPath": "/Users/nta/GreatLynx/CS296N/HeroBase/HeroBase/TTRPG-Character-Builder/TTRPG-Character-Builder.csproj",
-        "packagesPath": "/Users/nta/.nuget/packages/",
-        "outputPath": "/Users/nta/GreatLynx/CS296N/HeroBase/HeroBase/TTRPG-Character-Builder/obj/",
+        "projectPath": "C:\\Users\\namxe\\Documents\\Devel\\HeroBase-ASP\\HeroBase\\TTRPG-Character-Builder\\TTRPG-Character-Builder.csproj",
+        "packagesPath": "C:\\Users\\namxe\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\namxe\\Documents\\Devel\\HeroBase-ASP\\HeroBase\\TTRPG-Character-Builder\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/nta/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\namxe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
-          "/usr/local/share/dotnet/sdk/7.0.311/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -34,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -110,7 +120,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.311/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303\\RuntimeIdentifierGraph.json"
         }
       }
     }

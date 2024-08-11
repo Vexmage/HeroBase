@@ -31,9 +31,42 @@ namespace TTRPGtests.Controllers
             _context.Database.EnsureCreated();
 
             // Populate the database with test data
+            _context.Races.AddRange(
+                new Race { RaceId = 1, Name = "Elf", StrBonus = 1, DexBonus = 2, ConBonus = 0, IntBonus = 0, WisBonus = 0, ChaBonus = 0 },
+                new Race { RaceId = 2, Name = "Human", StrBonus = 1, DexBonus = 1, ConBonus = 1, IntBonus = 1, WisBonus = 1, ChaBonus = 1 }
+            );
+            _context.Classes.AddRange(
+                new Class { ClassId = 1, Name = "Warrior", Description = "A brave warrior." },
+                new Class { ClassId = 2, Name = "Mage", Description = "A wise mage." }
+            );
+
             _context.Characters.AddRange(
-                new Character { Name = "Eilodil", Race = "Elf", Class = "Warrior", Strength = 10, Dexterity = 10, Intelligence = 10, Wisdom = 10, Constitution = 10, Charisma = 10, Biography = "A brave warrior." },
-                new Character { Name = "Dexter", Race = "Human", Class = "Mage", Strength = 8, Dexterity = 9, Intelligence = 15, Wisdom = 14, Constitution = 12, Charisma = 11, Biography = "A wise mage." }
+                new Character
+                {
+                    Name = "Eilodil",
+                    RaceId = 1, // Elf
+                    ClassId = 1, // Warrior
+                    Strength = 10,
+                    Dexterity = 10,
+                    Intelligence = 10,
+                    Wisdom = 10,
+                    Constitution = 10,
+                    Charisma = 10,
+                    Biography = "A brave warrior."
+                },
+                new Character
+                {
+                    Name = "Dexter",
+                    RaceId = 2, // Human
+                    ClassId = 2, // Mage
+                    Strength = 8,
+                    Dexterity = 9,
+                    Intelligence = 15,
+                    Wisdom = 14,
+                    Constitution = 12,
+                    Charisma = 11,
+                    Biography = "A wise mage."
+                }
             );
             _context.SaveChanges();
 
@@ -57,7 +90,19 @@ namespace TTRPGtests.Controllers
         public async Task Create_PostAction_ShouldAddCharacter()
         {
             // Arrange
-            var newCharacter = new Character { Name = "NewCharacter", Race = "Orc", Class = "Barbarian", Strength = 12, Dexterity = 11, Intelligence = 10, Wisdom = 9, Constitution = 14, Charisma = 8, Biography = "A fierce warrior." };
+            var newCharacter = new Character
+            {
+                Name = "NewCharacter",
+                Race = new Race { RaceId = 3, Name = "Orc" },
+                Class = new Class { ClassId = 3, Name = "Barbarian" },
+                Strength = 12,
+                Dexterity = 11,
+                Intelligence = 10,
+                Wisdom = 9,
+                Constitution = 14,
+                Charisma = 8,
+                Biography = "A fierce warrior."
+            };
 
             // Act
             var result = await _controller.Create(newCharacter);
@@ -77,12 +122,12 @@ namespace TTRPGtests.Controllers
             characterToUpdate.Biography = "Updated Biography";
 
             // Act
-            var result = await _controller.Edit(characterToUpdate.ID, characterToUpdate);
+            var result = await _controller.Edit(characterToUpdate.CharacterId, characterToUpdate);
 
             // Assert
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", redirectToActionResult.ActionName);
-            var updatedCharacter = await _context.Characters.FindAsync(characterToUpdate.ID);
+            var updatedCharacter = await _context.Characters.FindAsync(characterToUpdate.CharacterId);
             Assert.Equal("Updated Biography", updatedCharacter.Biography);
         }
 
@@ -93,13 +138,14 @@ namespace TTRPGtests.Controllers
             var characterToDelete = await _context.Characters.FirstOrDefaultAsync(c => c.Name == "Dexter");
 
             // Act
-            var result = await _controller.DeleteConfirmed(characterToDelete.ID);
+            var result = await _controller.DeleteConfirmed(characterToDelete.CharacterId);
 
             // Assert
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", redirectToActionResult.ActionName);
-            Assert.False(_context.Characters.Any(c => c.ID == characterToDelete.ID));
+            Assert.False(_context.Characters.Any(c => c.CharacterId == characterToDelete.CharacterId));
         }
+
 
 
         public void Dispose()

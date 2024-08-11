@@ -1,40 +1,39 @@
 ﻿using Xunit;
 using Moq;
-using TTRPG_Character_Builder.Data;
 using TTRPG_Character_Builder.Controllers;
 using TTRPG_Character_Builder.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace TTRPGtests.Controllers
 {
     public class LoginTests : IDisposable
     {
-        private readonly ApplicationDbContext _context;
+        private readonly Mock<UserManager<ApplicationUser>> _mockUserManager;
+        private readonly Mock<SignInManager<ApplicationUser>> _mockSignInManager;
         private readonly UserController _userController;
 
         public LoginTests()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDb")
-                .Options;
+            // Set up mocks for UserManager and SignInManager
+            var store = new Mock<IUserStore<ApplicationUser>>();
+            _mockUserManager = new Mock<UserManager<ApplicationUser>>(store.Object, null, null, null, null, null, null, null, null);
+            var contextAccessor = new Mock<IHttpContextAccessor>();
+            var userPrincipalFactory = new Mock<IUserClaimsPrincipalFactory<ApplicationUser>>();
+            _mockSignInManager = new Mock<SignInManager<ApplicationUser>>(
+                _mockUserManager.Object,
+                contextAccessor.Object,
+                userPrincipalFactory.Object,
+                null, null, null, null);
 
-            _context = new ApplicationDbContext(options);
+            // Set up the UserController with mocked dependencies
+            _userController = new UserController(_mockUserManager.Object, _mockSignInManager.Object);
 
-            // Create a test user with known credentials
-            var testUser = new User
-            {
-                Username = "TestUser",
-                Password = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("TestPassword")),
-                Email = "test@example.com"
-            };
-            _context.Users.Add(testUser);
-            _context.SaveChanges();
-
-            _userController = new UserController(_context);
+            // Mock a successful sign-in
+            _mockSignInManager.Setup(s => s.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()))
+                .ReturnsAsync(Microsoft.AspNetCore.Identity.SignInResult.Success);
         }
 
         [Fact]
@@ -55,17 +54,9 @@ namespace TTRPGtests.Controllers
             Assert.Equal("Index", redirectResult.ActionName);
         }
 
-        private string HashPassword(string password)
-        {
-            return Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(password));
-        }
-
         public void Dispose()
         {
-            _context.Database.EnsureDeleted();
-            _context.Dispose();
+            // Dispose resources if needed
         }
     }
-
-
 }

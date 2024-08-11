@@ -16,8 +16,8 @@ namespace TTRPGtests.Models
             var character = new Character
             {
                 Name = "Legolas",
-                Race = "Elf",
-                Class = "Ranger",
+                Race = new Race { RaceId = 1, Name = "Elf", StrBonus = 2, DexBonus = 2 },
+                Class = new Class { ClassId = 1, Name = "Ranger", Description = "A skilled ranger." },
                 Strength = 17,
                 Dexterity = 17,
                 Constitution = 14,
@@ -33,12 +33,12 @@ namespace TTRPGtests.Models
             Assert.True(actual, "Expected validation to succeed with valid data.");
         }
 
+
         [Fact]
         public void CharacterModel_Validation_ShouldFailWithInvalidData()
         {
             var character = new Character
             {
-
                 Strength = 10,
                 Dexterity = 10,
                 Intelligence = 10,
